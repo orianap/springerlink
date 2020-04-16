@@ -3,16 +3,16 @@ package com.springerlink.testpages;
 
 import com.springerlink.basetest.BaseTest;
 import org.junit.*;
-import pages.Home;
+import pages.HomePage;
 
-public class HomePageTests extends BaseTest
+public class HomePagePageTests extends BaseTest
 {
-    private static Home homePage;
+    private static HomePage homePage;
 
     @Test
     public void test()
     {
-        homePage = new Home(getDriver());
+        homePage = new HomePage(getDriver());
         homePage.open();
     }
 
