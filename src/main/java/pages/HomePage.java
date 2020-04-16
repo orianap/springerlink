@@ -47,7 +47,7 @@ public class HomePage extends BasePage
         return this;
     }
 
-    public HomePage isNoResultsGt0()
+    public HomePage returnsResults()
     {
         String resultsStr = searchResult.get(0).getText().replace(",","");
         int numberOfResults = Integer.parseInt(resultsStr);

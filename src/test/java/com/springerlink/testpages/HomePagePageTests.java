@@ -9,8 +9,8 @@ public class HomePagePageTests extends BaseTest
 {
     private static HomePage homePage;
 
-    @Test
-    public void test()
+    @Before
+    public void beforeTest()
     {
         homePage = new HomePage(getDriver());
         homePage.open();
@@ -20,6 +20,19 @@ public class HomePagePageTests extends BaseTest
     public void afterTest()
     {
         homePage.close();
+    }
+
+    @AfterClass
+    public static void afterClass()
+    {
+        homePage.quit();
+    }
+
+    @Test
+    public void searchForTextReturnsResults()
+    {
+        homePage.searchFor("corona virus")
+                .returnsResults();
     }
 
 }
