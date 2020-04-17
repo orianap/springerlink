@@ -22,6 +22,12 @@ public class HomePage extends BasePage
     @FindBy(how = How.CSS, using = "#number-of-search-results-and-search-terms > strong")
     private List<WebElement> searchResult;
 
+    @FindBy(how = How.CSS, using = "#search-options")
+    private WebElement searchOptionsButton;
+
+    @FindBy(how = How.CSS, using = "#advanced-search-link")
+    private WebElement advancedSearchLink;
+
     public HomePage(WebDriver driver)
     {
         super(driver);
@@ -29,12 +35,6 @@ public class HomePage extends BasePage
 
     public String getUrl() {
         return pageURL;
-    }
-
-    public HomePage open()
-    {
-        driver.get(pageURL);
-        return this;
     }
 
     public HomePage searchFor(String text)
@@ -47,18 +47,39 @@ public class HomePage extends BasePage
         return this;
     }
 
-    public HomePage returnsResults()
+    private int getNumberOfResults()
     {
         String resultsStr = searchResult.get(0).getText().replace(",","");
-        int numberOfResults = Integer.parseInt(resultsStr);
-        assertTrue("FAILED: No Results Found",numberOfResults > 0 );
+        return Integer.parseInt(resultsStr);
+    }
+
+    public HomePage returnsResults()
+    {
+        int numberOfResults = getNumberOfResults();
+        assertTrue("FAILED: Expected results but no results were found",numberOfResults > 0 );
+        return this;
+    }
+
+    public HomePage checkNoResultsFound()
+    {
+        int numberOfResults = getNumberOfResults();
+        assertTrue("FAILED: Expected no result, but some results were found: "
+                + numberOfResults + " results", numberOfResults == 0);
         return this;
     }
 
     public HomePage checkSearchTerm(String term)
     {
-        String actualSearchTerm = searchResult.get(1).getText();
+        String actualSearchTerm = searchResult.get(1).getText().replace("'","");
         assertEquals(term, actualSearchTerm);
         return this;
+    }
+
+    public AdvancedSearch navigateToAdvancedSearch()
+    {
+        searchOptionsButton.click();
+        advancedSearchLink.click();
+
+        return new AdvancedSearch(driver);
     }
 }

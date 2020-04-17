@@ -5,7 +5,7 @@ import com.springerlink.basetest.BaseTest;
 import org.junit.*;
 import pages.HomePage;
 
-public class HomePagePageTests extends BaseTest
+public class HomePagePageTest extends BaseTest
 {
     private static HomePage homePage;
 
@@ -32,7 +32,8 @@ public class HomePagePageTests extends BaseTest
     public void searchForTextReturnsResults()
     {
         homePage.searchFor("corona virus")
-                .returnsResults();
+                .returnsResults()
+                .checkSearchTerm("corona virus");
     }
 
 }
