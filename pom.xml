@@ -9,7 +9,7 @@
     <name>springerlink</name>
 
     <properties>
-        <junit.Version>4.13</junit.Version>
+        <junit.Version>4.13.1</junit.Version>
         <selenium.Version>3.141.59</selenium.Version>
         <selenium-api.Version>3.141.59</selenium-api.Version>
         <selenium-chrome-driver.Version>3.141.59</selenium-chrome-driver.Version>
